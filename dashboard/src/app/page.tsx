@@ -8,6 +8,7 @@ import { LineChart } from "@/components/charts/LineChart";
 import { ComboChart } from "@/components/charts/ComboChart";
 import { DataTable } from "@/components/DataTable";
 import { ArchitectureSection } from "@/components/ArchitectureSection";
+import { AboutSection } from "@/components/AboutSection";
 import { ArrowLeftIcon, ArrowUpRightIcon, BookOpenIcon, GithubIcon } from "@/components/icons";
 import { formatDateFull } from "@/components/charts/chart-utils";
 
@@ -148,6 +149,10 @@ export default function Home() {
 
       <section className="mb-10">
         <ArchitectureSection />
+      </section>
+
+      <section className="mb-10">
+        <AboutSection />
       </section>
 
       <footer className="border-t border-border py-6 text-center text-xs text-muted-foreground">
