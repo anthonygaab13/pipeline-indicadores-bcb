@@ -21,7 +21,9 @@ export default function BastidoresPage() {
       </Link>
 
       <header className="mb-12">
-        <p className="font-mono text-xs tracking-wider text-primary uppercase">Bastidores</p>
+        <p className="font-mono text-xs tracking-wider text-primary uppercase">
+          <span aria-hidden>{"> "}</span>Bastidores
+        </p>
         <h1 className="mt-1 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Diário de <span className="text-gradient-accent">bordo</span>
         </h1>

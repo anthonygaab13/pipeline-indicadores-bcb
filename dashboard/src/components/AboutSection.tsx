@@ -25,7 +25,9 @@ export function AboutSection() {
         </div>
 
         <div className="min-w-0">
-          <p className="font-mono text-xs tracking-wider text-primary uppercase">Sobre</p>
+          <p className="font-mono text-xs tracking-wider text-primary uppercase">
+            <span aria-hidden>{"> "}</span>Sobre
+          </p>
           <h3 className="mt-1 text-lg font-semibold text-foreground">Anthony Gabriel</h3>
 
           <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">

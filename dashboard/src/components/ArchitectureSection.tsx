@@ -33,7 +33,7 @@ export function ArchitectureSection() {
       <div className="mt-5 grid gap-4 sm:grid-cols-3">
         {STEPS.map((s) => (
           <div key={s.step}>
-            <p className="font-mono text-xs text-primary">{s.step}</p>
+            <p className="font-mono text-xs text-primary">[{s.step}]</p>
             <p className="mt-1 text-sm font-semibold text-foreground">{s.title}</p>
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.description}</p>
           </div>

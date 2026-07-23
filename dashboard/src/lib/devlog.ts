@@ -13,6 +13,12 @@ export interface DevlogEntry {
 export const devlog: DevlogEntry[] = [
   {
     date: "2026-07-23",
+    tag: "Design",
+    title: "Aurora virou Terminal",
+    body: "Mesmo depois de trocar a pele pra Aurora, ainda achava o resultado meio básico: o \"dark com glow azul/violeta\" é praticamente o padrão de qualquer produto tentando parecer premium hoje em dia. Comparei de novo três direções com dado real (um boletim institucional, um terminal e uma inspirada na cédula do Real) e fui pra mais ousada das três. Trocado o Geist por uma única fonte monoespaçada no site inteiro, cantos retos em vez de rounded-lg em tudo, labels entre colchetes, delta com Δ, leitura automática com prefixo //. Menos parecido com dashboard genérico de IA, mais parecido com uma ferramenta de verdade.",
+  },
+  {
+    date: "2026-07-23",
     tag: "Identidade",
     title: "Coloquei a cara no projeto",
     body: "Até aqui o dashboard era 100% sobre o dado, sem nada sobre quem construiu. Recebi o toque de que faltava isso. O projeto tava ficando bem arquitetado, mas sem identidade. Adicionei a seção Sobre e esse diário de bordo: a ideia não é só mostrar código pronto, é documentar o processo mesmo, decisão por decisão.",

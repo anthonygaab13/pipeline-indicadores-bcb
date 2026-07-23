@@ -1,12 +1,16 @@
-// Stat tile: label + valor em destaque (com leve glow no acento, identidade "Aurora") + delta
-// (opcional, colorido por direção) + sparkline com preenchimento em gradiente. Segue o
-// contrato de "Figures" da skill de dataviz — número em fonte proporcional (não tabular),
+// Stat tile: label entre colchetes (identidade "Terminal") + valor em destaque (com leve
+// glow no acento) + delta prefixado com Δ + sparkline com preenchimento em gradiente. Segue
+// o contrato de "Figures" da skill de dataviz — número em fonte proporcional (não tabular),
 // delta assinado, sparkline no tom de baixa ênfase com o trecho atual em destaque.
+//
+// SPARK_W enxuto de propósito: o JetBrains Mono é mais largo por caractere que uma fonte
+// proporcional, então o valor (ex: "R$ 5.0638") precisa de mais espaço na mesma largura de
+// card do que precisava antes — reduzir a sparkline é mais barato que estourar o layout.
 
 import { useId } from "react";
 import { AnimatedNumber } from "./AnimatedNumber";
 
-const SPARK_W = 96;
+const SPARK_W = 80;
 const SPARK_H = 28;
 
 function sparklinePoints(values: number[]): { x: number; y: number }[] {
@@ -71,16 +75,29 @@ export function StatTile({
 
   return (
     <div className="rounded-lg border border-border bg-card p-4">
-      <p className="text-xs text-muted-foreground">{label}</p>
-      <div className="mt-1.5 flex items-end justify-between gap-3">
-        <div>
+      <p className="text-xs text-muted-foreground">
+        <span className="text-muted-foreground/50" aria-hidden>
+          [{" "}
+        </span>
+        {label}
+        <span className="text-muted-foreground/50" aria-hidden>
+          {" "}]
+        </span>
+      </p>
+      <div className="mt-1.5 flex items-end justify-between gap-2">
+        <div className="min-w-0">
           <p
-            className="text-2xl font-semibold text-foreground"
+            className="text-xl font-semibold text-foreground whitespace-nowrap"
             style={{ textShadow: `0 0 20px color-mix(in srgb, ${accentColor} 45%, transparent)` }}
           >
             <AnimatedNumber value={numericValue} decimals={decimals} prefix={prefix} suffix={suffix} />
           </p>
-          {deltaLabel && <p className={`mt-0.5 text-xs tabular-nums ${deltaColor}`}>{deltaLabel}</p>}
+          {deltaLabel && (
+            <p className={`mt-0.5 text-xs tabular-nums ${deltaColor}`}>
+              <span aria-hidden>Δ </span>
+              {deltaLabel}
+            </p>
+          )}
         </div>
         {points.length > 1 && (
           <svg width={SPARK_W} height={SPARK_H} viewBox={`0 0 ${SPARK_W} ${SPARK_H}`} aria-hidden className="shrink-0">

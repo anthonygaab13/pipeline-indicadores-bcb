@@ -23,9 +23,12 @@ export function InsightsPanel({ insights }: { insights: Insight[] }) {
         const meta = STATUS_META[insight.status];
         const Icon = meta.icon;
         return (
-          <div key={insight.id} className="rounded-lg border border-border bg-card p-4">
+          <div key={insight.id} className="rounded-lg border border-dashed border-border bg-card p-4">
             <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: meta.color }}>
               <Icon className="size-3.5 shrink-0" />
+              <span aria-hidden className="opacity-60">
+                {"//"}
+              </span>
               {meta.label}
             </div>
             <h4 className="mt-1.5 text-sm font-medium text-foreground">{insight.title}</h4>
