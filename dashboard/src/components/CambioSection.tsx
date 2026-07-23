@@ -45,7 +45,7 @@ export function CambioSection({ data }: { data: CambioPoint[] }) {
         xLabels={sliced.map((d) => d.data)}
         yFormat="decimal2"
         series={[
-          { key: "cambio", label: "Câmbio", color: "var(--series-cambio)", data: sliced.map((d) => d.cambio) },
+          { key: "cambio", label: "Câmbio", color: "var(--series-cambio)", areaFill: true, data: sliced.map((d) => d.cambio) },
           {
             key: "mm7",
             label: "Média móvel 7d",

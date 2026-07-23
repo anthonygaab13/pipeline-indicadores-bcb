@@ -5,11 +5,12 @@
 // "gruda" no ponto de dado mais próximo, tooltip com todas as séries daquele X, legenda
 // só quando há 2+ séries. Ver components/charts/chart-utils.ts pra escala/matemática.
 
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import {
   PAD,
   VB_HEIGHT,
   VB_WIDTH,
+  areaPath,
   formatDateFull,
   formatDateShort,
   formatValue,
@@ -28,6 +29,9 @@ export interface LineSeries {
   color: string;
   opacity?: number;
   data: (number | null)[];
+  /** Preenche a área sob a linha com um gradiente que desvanece pra transparente — usar só
+   * na série em destaque (ex: a linha principal, não médias móveis auxiliares). */
+  areaFill?: boolean;
 }
 
 export function LineChart({
@@ -41,6 +45,7 @@ export function LineChart({
   yFormat?: ValueFormat;
   yDomain?: [number, number];
 }) {
+  const uid = useId().replace(/:/g, "");
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
@@ -90,6 +95,19 @@ export function LineChart({
         onTouchMove={(e) => e.touches[0] && handleMove(e.touches[0].clientX)}
         onTouchEnd={() => setHoverIndex(null)}
       >
+        {series.some((s) => s.areaFill) && (
+          <defs>
+            {series
+              .filter((s) => s.areaFill)
+              .map((s) => (
+                <linearGradient key={s.key} id={`${uid}-area-${s.key}`} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={s.color} stopOpacity={0.28} />
+                  <stop offset="100%" stopColor={s.color} stopOpacity={0} />
+                </linearGradient>
+              ))}
+          </defs>
+        )}
+
         {yTicks.map((t, i) => {
           const y = VB_HEIGHT - PAD.bottom - (i / (yTicks.length - 1)) * (VB_HEIGHT - PAD.top - PAD.bottom);
           return (
@@ -120,6 +138,11 @@ export function LineChart({
             {formatDateShort(xLabels[idx])}
           </text>
         ))}
+
+        {series.map(
+          (s) =>
+            s.areaFill && <path key={`${s.key}-area`} d={areaPath(s.data, domain)} fill={`url(#${uid}-area-${s.key})`} stroke="none" />,
+        )}
 
         {series.map((s) => (
           <path

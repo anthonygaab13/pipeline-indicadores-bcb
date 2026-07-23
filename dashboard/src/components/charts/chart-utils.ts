@@ -49,6 +49,37 @@ export function linePath(
   return d;
 }
 
+// Mesmos pontos de linePath, mas fechando cada trecho contínuo até a base do gráfico —
+// usado pro preenchimento em gradiente sob a série em destaque (identidade "Aurora").
+// Lida com múltiplos trechos (se houver nulos no meio dos dados) fechando cada um
+// separadamente, em vez de ligar visualmente pontos que não são realmente contíguos.
+export function areaPath(values: (number | null)[], domain: [number, number]): string {
+  const baseline = VB_HEIGHT - PAD.bottom;
+  const segments: string[] = [];
+  let current: { x: number; y: number }[] = [];
+
+  function flush() {
+    if (current.length >= 2) {
+      const first = current[0];
+      const last = current[current.length - 1];
+      const line = current.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(" ");
+      segments.push(`${line} L ${last.x.toFixed(2)} ${baseline} L ${first.x.toFixed(2)} ${baseline} Z`);
+    }
+    current = [];
+  }
+
+  values.forEach((v, i) => {
+    if (v === null || !Number.isFinite(v)) {
+      flush();
+      return;
+    }
+    current.push({ x: scaleX(i, values.length), y: scaleY(v, domain) });
+  });
+  flush();
+
+  return segments.join(" ");
+}
+
 export function formatDateShort(iso: string): string {
   const [year, month] = iso.split("-");
   const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];

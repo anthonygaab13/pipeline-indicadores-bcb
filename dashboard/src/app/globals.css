@@ -1,17 +1,26 @@
 @import "tailwindcss";
 
-/* Dashboard sempre no tema escuro (sem toggle) — mesma paleta do portfólio
-   (fundo quase preto, acento azul), com uma tríade categórica própria pra
-   distinguir câmbio/Selic/IPCA nos gráficos. Paleta de gráfico validada com
-   o script de acessibilidade da skill de dataviz (CVD + contraste, ver PR). */
+/* Dashboard sempre no tema escuro (sem toggle) — identidade "Aurora": fundo quase preto
+   com um glow ambiente azul/violeta, cards em vidro fosco (glass) e números com leve
+   brilho no acento. Escolhida entre 3 direções comparadas visualmente (ver histórico do
+   projeto) — a mais "premium/fintech" das três. As cores de série (câmbio/Selic/IPCA)
+   continuam as mesmas já validadas por acessibilidade (CVD + contraste, skill de
+   dataviz) — só a "pele" ao redor delas mudou, não a paleta que carrega dado. */
 :root {
-  --background: #0a0a0a;
-  --card: #171717;
-  --foreground: #fafafa;
-  --muted-foreground: #aeaeae;
+  --background: #07080b;
+  /* Translúcido de propósito: é o que dá o efeito de vidro em todo card que usa bg-card
+     (ver a regra `.bg-card` mais abaixo, que acopla o blur/glow a essa mesma classe). */
+  --card: rgba(255, 255, 255, 0.05);
+  --foreground: #f2f4f8;
+  --muted-foreground: #9aa0ad;
   --border: rgba(255, 255, 255, 0.1);
-  --primary: #00bcff;
-  --primary-foreground: #0a0a0a;
+  --primary: #55acff;
+  --primary-foreground: #07080b;
+  /* Segundo tom do gradiente do acento (título, glow de fundo) — não é cor de série,
+     nunca usar em gráfico (ver color-formula.md da skill de dataviz). */
+  --accent-2: #9c8bff;
+  --glow-1: rgba(85, 172, 255, 0.28);
+  --glow-2: rgba(156, 139, 255, 0.2);
 
   /* Cores de série dos gráficos — não usar essas cores em texto (ver marks-and-anatomy) */
   --series-cambio: #0093d5;
@@ -27,6 +36,7 @@
   --color-border: var(--border);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-accent-2: var(--accent-2);
   --color-series-cambio: var(--series-cambio);
   --color-series-selic: var(--series-selic);
   --color-series-ipca: var(--series-ipca);
@@ -35,8 +45,32 @@
 }
 
 body {
-  background: var(--background);
+  /* Glow ambiente fixo no viewport (não rola com a página) atrás de todo o conteúdo —
+     duas manchas radiais bem suaves, mesma posição usada na comparação de direções. */
+  background:
+    radial-gradient(55% 45% at 18% 8%, var(--glow-1), transparent 72%),
+    radial-gradient(45% 38% at 85% 18%, var(--glow-2), transparent 72%),
+    var(--background);
+  background-attachment: fixed, fixed, fixed;
   color: var(--foreground);
+}
+
+/* Todo elemento que usa a utilitária bg-card vira "vidro fosco" automaticamente — evita
+   repetir blur/shadow em cada componente que já monta cards com bg-card + border-border. */
+.bg-card {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 16px 32px -24px rgba(85, 172, 255, 0.18);
+}
+
+/* Texto com gradiente do acento (título do hero) — nunca usar em número de gráfico. */
+.text-gradient-accent {
+  background: linear-gradient(95deg, var(--primary), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Números em colunas/eixos alinham pela largura do dígito; texto normal não. */
