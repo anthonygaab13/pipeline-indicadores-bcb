@@ -4,6 +4,7 @@
 // delta assinado, sparkline no tom de baixa ênfase com o trecho atual em destaque.
 
 import { useId } from "react";
+import { AnimatedNumber } from "./AnimatedNumber";
 
 const SPARK_W = 96;
 const SPARK_H = 28;
@@ -33,14 +34,21 @@ function sparklineAreaPath(points: { x: number; y: number }[]): string {
 
 export function StatTile({
   label,
-  value,
+  numericValue,
+  decimals = 2,
+  prefix = "",
+  suffix = "",
   deltaLabel,
   deltaDirection,
   sparkline,
   accentColor,
 }: {
   label: string;
-  value: string;
+  /** Número puro (não string já formatada) — assim o AnimatedNumber consegue contar até ele. */
+  numericValue: number;
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
   deltaLabel?: string;
   /** "up-good" e "down-good" pintam o delta de acordo com o que é favorável; "neutral" fica cinza. */
   deltaDirection?: "up-good" | "down-good" | "neutral";
@@ -70,7 +78,7 @@ export function StatTile({
             className="text-2xl font-semibold text-foreground"
             style={{ textShadow: `0 0 20px color-mix(in srgb, ${accentColor} 45%, transparent)` }}
           >
-            {value}
+            <AnimatedNumber value={numericValue} decimals={decimals} prefix={prefix} suffix={suffix} />
           </p>
           {deltaLabel && <p className={`mt-0.5 text-xs tabular-nums ${deltaColor}`}>{deltaLabel}</p>}
         </div>

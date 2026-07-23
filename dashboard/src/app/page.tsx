@@ -1,5 +1,6 @@
 import { loadCambio, loadMensal, loadSelic, loadStats } from "@/lib/data";
 import { computeInsights } from "@/lib/insights";
+import { Reveal } from "@/components/Reveal";
 import { StatTile } from "@/components/StatTile";
 import { InsightsPanel } from "@/components/InsightsPanel";
 import { Calculator } from "@/components/Calculator";
@@ -74,90 +75,114 @@ export default function Home() {
         </p>
       </header>
 
-      <section className="mb-10 grid gap-3 sm:grid-cols-3">
-        <StatTile
-          label="Câmbio (USD/BRL)"
-          value={`R$ ${stats.cambio.toFixed(4)}`}
-          deltaLabel={`${signed(stats.cambio_variacao_pct_dia, 2, "%")} no dia`}
-          deltaDirection="neutral"
-          sparkline={cambio.slice(-30).map((d) => d.cambio)}
-          accentColor="var(--series-cambio)"
-        />
-        <StatTile
-          label="Selic"
-          value={`${stats.selic_anualizada.toFixed(2)}% a.a.`}
-          deltaLabel={`${stats.selic.toFixed(4)}% ao dia`}
-          deltaDirection="neutral"
-          sparkline={selic.slice(-90).map((d) => d.selic)}
-          accentColor="var(--series-selic)"
-        />
-        <StatTile
-          label="IPCA acumulado (12 meses)"
-          value={`${stats.ipca_acumulado_12m.toFixed(2)}%`}
-          deltaLabel={`${signed(stats.ipca_acumulado_12m_delta, 2, "pp")} vs mês anterior`}
-          deltaDirection="down-good"
-          sparkline={mensal.slice(-12).map((d) => d.ipca_acumulado_12m)}
-          accentColor="var(--series-ipca)"
-        />
-      </section>
+      <Reveal>
+        <section className="mb-10 grid gap-3 sm:grid-cols-3">
+          <StatTile
+            label="Câmbio (USD/BRL)"
+            numericValue={stats.cambio}
+            decimals={4}
+            prefix="R$ "
+            deltaLabel={`${signed(stats.cambio_variacao_pct_dia, 2, "%")} no dia`}
+            deltaDirection="neutral"
+            sparkline={cambio.slice(-30).map((d) => d.cambio)}
+            accentColor="var(--series-cambio)"
+          />
+          <StatTile
+            label="Selic"
+            numericValue={stats.selic_anualizada}
+            decimals={2}
+            suffix="% a.a."
+            deltaLabel={`${stats.selic.toFixed(4)}% ao dia`}
+            deltaDirection="neutral"
+            sparkline={selic.slice(-90).map((d) => d.selic)}
+            accentColor="var(--series-selic)"
+          />
+          <StatTile
+            label="IPCA acumulado (12 meses)"
+            numericValue={stats.ipca_acumulado_12m}
+            decimals={2}
+            suffix="%"
+            deltaLabel={`${signed(stats.ipca_acumulado_12m_delta, 2, "pp")} vs mês anterior`}
+            deltaDirection="down-good"
+            sparkline={mensal.slice(-12).map((d) => d.ipca_acumulado_12m)}
+            accentColor="var(--series-ipca)"
+          />
+        </section>
+      </Reveal>
 
-      <section className="mb-10">
-        <h2 className="mb-3 text-sm font-medium text-foreground">Leituras automáticas</h2>
-        <InsightsPanel insights={insights} />
-      </section>
+      <Reveal>
+        <section className="mb-10">
+          <h2 className="mb-3 text-sm font-medium text-foreground">Leituras automáticas</h2>
+          <InsightsPanel insights={insights} />
+        </section>
+      </Reveal>
 
-      <section className="mb-10">
-        <h2 className="mb-1 text-sm font-medium text-foreground">Calculadora</h2>
-        <p className="mb-3 text-xs text-muted-foreground">
-          Ferramentas rápidas de campo — câmbio e Selic direto da fonte oficial, sem precisar abrir planilha.
-        </p>
-        <Calculator
-          fallback={{
-            cambio: stats.cambio,
-            cambioData: stats.cambio_data,
-            selicDiaria: stats.selic,
-            selicData: stats.selic_data,
-          }}
-        />
-      </section>
+      <Reveal>
+        <section className="mb-10">
+          <h2 className="mb-1 text-sm font-medium text-foreground">Calculadora</h2>
+          <p className="mb-3 text-xs text-muted-foreground">
+            Ferramentas rápidas de campo — câmbio e Selic direto da fonte oficial, sem precisar abrir planilha.
+          </p>
+          <Calculator
+            fallback={{
+              cambio: stats.cambio,
+              cambioData: stats.cambio_data,
+              selicDiaria: stats.selic,
+              selicData: stats.selic_data,
+            }}
+          />
+        </section>
+      </Reveal>
 
-      <section className="mb-10 rounded-lg border border-border bg-card p-5">
-        <CambioSection data={cambio} />
-      </section>
+      <Reveal>
+        <section className="mb-10 rounded-lg border border-border bg-card p-5">
+          <CambioSection data={cambio} />
+        </section>
+      </Reveal>
 
-      <section className="mb-10 rounded-lg border border-border bg-card p-5">
-        <h3 className="mb-3 text-sm font-medium text-foreground">Selic (% ao dia)</h3>
-        <LineChart
-          xLabels={selic.map((d) => d.data)}
-          yFormat="percent3"
-          series={[{ key: "selic", label: "Selic", color: "var(--series-selic)", data: selic.map((d) => d.selic) }]}
-        />
-      </section>
+      <Reveal>
+        <section className="mb-10 rounded-lg border border-border bg-card p-5">
+          <h3 className="mb-3 text-sm font-medium text-foreground">Selic (% ao dia)</h3>
+          <LineChart
+            xLabels={selic.map((d) => d.data)}
+            yFormat="percent3"
+            series={[{ key: "selic", label: "Selic", color: "var(--series-selic)", data: selic.map((d) => d.selic) }]}
+          />
+        </section>
+      </Reveal>
 
-      <section className="mb-10 rounded-lg border border-border bg-card p-5">
-        <h3 className="mb-3 text-sm font-medium text-foreground">IPCA — variação mensal e acumulado em 12 meses</h3>
-        <ComboChart
-          xLabels={mensal.map((d) => d.mes.slice(0, 7))}
-          bars={mensal.map((d) => d.ipca_mensal)}
-          line={mensal.map((d) => d.ipca_acumulado_12m)}
-          barColor="var(--series-ipca)"
-          lineColor="var(--foreground)"
-          barLabel="Variação mensal"
-          lineLabel="Acumulado 12 meses"
-        />
-      </section>
+      <Reveal>
+        <section className="mb-10 rounded-lg border border-border bg-card p-5">
+          <h3 className="mb-3 text-sm font-medium text-foreground">IPCA — variação mensal e acumulado em 12 meses</h3>
+          <ComboChart
+            xLabels={mensal.map((d) => d.mes.slice(0, 7))}
+            bars={mensal.map((d) => d.ipca_mensal)}
+            line={mensal.map((d) => d.ipca_acumulado_12m)}
+            barColor="var(--series-ipca)"
+            lineColor="var(--foreground)"
+            barLabel="Variação mensal"
+            lineLabel="Acumulado 12 meses"
+          />
+        </section>
+      </Reveal>
 
-      <section className="mb-10">
-        <DataTable rows={mensal} />
-      </section>
+      <Reveal>
+        <section className="mb-10">
+          <DataTable rows={mensal} />
+        </section>
+      </Reveal>
 
-      <section className="mb-10">
-        <ArchitectureSection />
-      </section>
+      <Reveal>
+        <section className="mb-10">
+          <ArchitectureSection />
+        </section>
+      </Reveal>
 
-      <section className="mb-10">
-        <AboutSection />
-      </section>
+      <Reveal>
+        <section className="mb-10">
+          <AboutSection />
+        </section>
+      </Reveal>
 
       <footer className="border-t border-border py-6 text-center text-xs text-muted-foreground">
         Construído por{" "}
