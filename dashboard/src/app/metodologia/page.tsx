@@ -23,7 +23,7 @@ export default function MetodologiaPage() {
       <header className="mb-10">
         <p className="font-mono text-xs tracking-wider text-primary uppercase">Transparência</p>
         <h1 className="mt-1 font-serif text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Fontes e metodologia</h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-body">
           Todo número mostrado neste dashboard é rastreável até aqui: qual série oficial ele usa e qual conta foi
           feita em cima dela. Nada é estimado por IA/modelo: são fórmulas fixas e auditáveis, documentadas abaixo.
         </p>
@@ -34,7 +34,7 @@ export default function MetodologiaPage() {
         {methodology.map((entry) => (
           <section key={entry.id} id={entry.id} className="scroll-mt-6 rounded-lg border border-border bg-card p-5">
             <h2 className="text-base font-semibold text-foreground">{entry.title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{entry.summary}</p>
+            <p className="mt-2 max-w-[65ch] text-base leading-relaxed text-body">{entry.summary}</p>
 
             {entry.formula && (
               <p className="mt-3 overflow-x-auto rounded-md border border-border bg-background px-3 py-2 font-mono text-xs text-foreground">

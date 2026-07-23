@@ -82,7 +82,7 @@ export function StatTile({
         <div className="min-w-0">
           <p
             className="font-serif text-xl font-semibold text-foreground whitespace-nowrap"
-            style={{ textShadow: `0 0 20px color-mix(in srgb, ${accentColor} 45%, transparent)` }}
+            style={{ textShadow: `0 0 16px color-mix(in srgb, ${accentColor} 30%, transparent)` }}
           >
             <AnimatedNumber value={numericValue} decimals={decimals} prefix={prefix} suffix={suffix} />
           </p>

@@ -25,7 +25,7 @@ export function ArchitectureSection() {
   return (
     <div className="rounded-lg border border-border bg-card p-5">
       <h2 className="text-sm font-medium text-foreground">Como funciona</h2>
-      <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+      <p className="mt-1 max-w-2xl text-base leading-relaxed text-body">
         Pipeline de dados em arquitetura medallion, atualizado automaticamente toda semana via GitHub
         Actions. Este dashboard lê os dados diretamente das tabelas gold geradas pela pipeline.
       </p>

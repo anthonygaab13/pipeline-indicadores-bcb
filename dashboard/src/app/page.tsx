@@ -62,7 +62,7 @@ export default function Home() {
         <h1 className="mt-1 font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           Indicadores <span className="text-gradient-accent">Financeiros</span> do Banco Central
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-body">
           Câmbio (USD/BRL), Selic e IPCA extraídos da API pública do Banco Central, tratados numa
           pipeline em arquitetura medallion e atualizados automaticamente toda semana.
         </p>

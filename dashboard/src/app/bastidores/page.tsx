@@ -1,6 +1,8 @@
 // "Bastidores" — o diário de bordo do projeto (ver lib/devlog.ts pra adicionar entradas).
 // Server Component estático: uma timeline vertical com ponto luminoso por entrada, no mesmo
-// idioma visual "Aurora" do resto do site (glow no acento, cards em vidro).
+// idioma visual "Boletim" do resto do site. Corpo da entrada usa text-body (não
+// muted-foreground) e max-w-[65ch]: é o texto mais longo do site, então ganha a cor de
+// leitura e uma largura de linha confortável, não só o tom "legenda".
 
 import Link from "next/link";
 import { devlog } from "@/lib/devlog";
@@ -25,7 +27,7 @@ export default function BastidoresPage() {
         <h1 className="mt-1 font-serif text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           Diário de <span className="text-gradient-accent">bordo</span>
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-body">
           Não é changelog técnico: é o porquê por trás de cada decisão, contado do jeito que aconteceu de verdade,
           erros incluídos. Atualizo conforme o projeto (e os próximos) avançam.
         </p>
@@ -44,7 +46,7 @@ export default function BastidoresPage() {
               {formatDateFull(entry.date)} <span className="text-primary">· {entry.tag}</span>
             </p>
             <h2 className="mt-1 text-base font-semibold text-foreground">{entry.title}</h2>
-            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{entry.body}</p>
+            <p className="mt-1.5 max-w-[65ch] text-base leading-relaxed text-body">{entry.body}</p>
           </li>
         ))}
       </ol>

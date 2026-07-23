@@ -10,14 +10,23 @@
    reservado pra eyebrow, rótulo e dado tabular (ver layout.tsx) — cada fonte tem um papel,
    nenhuma delas é "a fonte do site inteiro". As cores de série (câmbio/Selic/IPCA)
    continuam as mesmas já validadas por acessibilidade (CVD + contraste, skill de
-   dataviz, revalidado contra o novo fundo) — só a "pele" ao redor mudou. */
+   dataviz, revalidado contra o novo fundo) — só a "pele" ao redor mudou.
+
+   Ajuste de conforto de leitura: fundo não é mais quase-preto puro (#0a0e1a) e o texto
+   não é mais branco quase puro (#eef1f7) — contraste alto demais cansa a vista em uso
+   prolongado, é a mesma razão pela qual o Material Design recomenda não usar #000/#fff
+   puros em tema escuro. --body é um tom novo, entre --foreground e --muted-foreground:
+   texto que a pessoa precisa mesmo ler com atenção (leitura automática, diário de bordo,
+   metodologia, bio) usa --body; --muted-foreground fica reservado pra legenda/rótulo/
+   timestamp, coisa que é só escaneada, não lida frase a frase. */
 :root {
-  --background: #0a0e1a;
+  --background: #10162a;
   /* Translúcido com leve matiz dourado — mesmo papel de antes: todo card com bg-card
      herda isso (ver `.bg-card` abaixo). */
   --card: rgba(201, 162, 75, 0.045);
-  --foreground: #eef1f7;
-  --muted-foreground: #8b95ad;
+  --foreground: #e6e9f2;
+  --body: #c3cbdb;
+  --muted-foreground: #8f99b3;
   --border: rgba(201, 162, 75, 0.18);
   --primary: #2fa876;
   --primary-foreground: #06120c;
@@ -36,6 +45,7 @@
   --color-background: var(--background);
   --color-card: var(--card);
   --color-foreground: var(--foreground);
+  --color-body: var(--body);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-primary: var(--primary);
@@ -59,7 +69,7 @@ body {
      retângulo morto. */
   background:
     radial-gradient(70% 50% at 18% -8%, var(--glow-1), transparent 65%),
-    linear-gradient(180deg, #0c1120 0%, var(--background) 420px);
+    linear-gradient(180deg, #161d35 0%, var(--background) 420px);
   background-attachment: fixed, scroll;
   color: var(--foreground);
 }

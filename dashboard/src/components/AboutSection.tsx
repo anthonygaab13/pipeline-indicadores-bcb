@@ -28,7 +28,7 @@ export function AboutSection() {
           <p className="font-mono text-xs tracking-wider text-primary uppercase">Sobre</p>
           <h3 className="mt-1 font-serif text-lg font-semibold text-foreground">Anthony Gabriel</h3>
 
-          <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
+          <div className="mt-3 max-w-[65ch] space-y-3 text-base leading-relaxed text-body">
             <p>
               Depois de alguns anos passando por operações, processos e BI, decidi focar de vez em engenharia de
               dados: entender não só &ldquo;o que aconteceu&rdquo;, mas construir o caminho inteiro, da extração até
