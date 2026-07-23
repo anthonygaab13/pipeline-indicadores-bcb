@@ -7,6 +7,7 @@
 // confiar no que está sendo dito pro cliente.
 
 import type { CambioPoint, MensalPoint, Stats } from "./data";
+import { jurosReais, selicAnualizada } from "./finance";
 
 export type InsightStatus = "good" | "warning" | "critical" | "neutral";
 
@@ -15,6 +16,8 @@ export interface Insight {
   title: string;
   message: string;
   status: InsightStatus;
+  /** Aponta pra uma entrada de lib/methodology.ts — vira o link "Fonte e metodologia" no card. */
+  sourceId: string;
 }
 
 // Meta de inflação contínua do CMN (Conselho Monetário Nacional), vigente desde 2025:
@@ -24,12 +27,6 @@ const IPCA_META_CENTRO = 3;
 const IPCA_META_TOLERANCIA = 1.5;
 const IPCA_META_BAIXO = IPCA_META_CENTRO - IPCA_META_TOLERANCIA;
 const IPCA_META_ALTO = IPCA_META_CENTRO + IPCA_META_TOLERANCIA;
-
-// Juro real pela fórmula de Fisher: desconta a inflação acumulada da taxa nominal
-// anualizada, em vez de simplesmente subtrair os dois percentuais.
-function jurosReais(selicAnualizada: number, ipcaAcumulado12m: number): number {
-  return ((1 + selicAnualizada / 100) / (1 + ipcaAcumulado12m / 100) - 1) * 100;
-}
 
 function insightJuroReal(stats: Stats): Insight {
   const real = jurosReais(stats.selic_anualizada, stats.ipca_acumulado_12m);
@@ -50,6 +47,7 @@ function insightJuroReal(stats: Stats): Insight {
     title: "Juro real (Selic − IPCA)",
     message: `Juro real em ${real.toFixed(2)}% a.a. — ${leitura}`,
     status,
+    sourceId: "juro-real-fisher",
   };
 }
 
@@ -74,6 +72,7 @@ function insightIpcaMeta(stats: Stats): Insight {
     title: "IPCA vs. meta do Banco Central",
     message: `IPCA acumulado em 12 meses: ${v.toFixed(2)}% — ${leitura}`,
     status,
+    sourceId: "ipca-meta-cmn",
   };
 }
 
@@ -103,6 +102,7 @@ function insightCambioRange(cambio: CambioPoint[]): Insight {
     title: "Câmbio no intervalo de 12 meses",
     message: `R$ ${atual.toFixed(4)} está no percentil ${percentil.toFixed(0)} da faixa de 12 meses (R$ ${min.toFixed(2)} – R$ ${max.toFixed(2)}) — ${leitura}`,
     status,
+    sourceId: "cambio-range-percentil",
   };
 }
 
@@ -119,6 +119,7 @@ function insightCambioTendencia(cambio: CambioPoint[]): Insight {
       title: "Tendência do câmbio (curto prazo)",
       message: "Histórico insuficiente pra calcular a tendência ainda.",
       status: "neutral",
+      sourceId: "cambio-tendencia-medias",
     };
   }
 
@@ -132,16 +133,14 @@ function insightCambioTendencia(cambio: CambioPoint[]): Insight {
     title: "Tendência do câmbio (curto prazo)",
     message: `Câmbio ${leitura}`,
     status: "neutral",
+    sourceId: "cambio-tendencia-medias",
   };
 }
 
-// Mesma conversão (diária -> anualizada) usada no export_json.py pro stats.json, aplicada
-// aqui aos pontos mensais pra comparar a Selic de 3 meses atrás com a atual em p.p. ao ano
-// (comparar direto o valor diário esconderia o tamanho real do movimento).
-function selicAnualizada(selicDiaria: number): number {
-  return (Math.pow(1 + selicDiaria / 100, 252) - 1) * 100;
-}
-
+// A conversão diária -> anualizada usada aqui (selicAnualizada, importada de ./finance) é a
+// mesma fórmula aplicada no export_json.py pro stats.json — comparar os pontos mensais já
+// anualizados evita que o tamanho real do movimento fique escondido atrás de casas decimais
+// minúsculas da taxa diária.
 function insightCicloSelic(mensal: MensalPoint[]): Insight {
   const comValor = mensal.filter((m) => m.selic_media != null);
 
@@ -151,6 +150,7 @@ function insightCicloSelic(mensal: MensalPoint[]): Insight {
       title: "Ciclo de juros (Selic)",
       message: "Histórico insuficiente pra identificar o ciclo ainda.",
       status: "neutral",
+      sourceId: "ciclo-selic",
     };
   }
 
@@ -167,6 +167,7 @@ function insightCicloSelic(mensal: MensalPoint[]): Insight {
     title: "Ciclo de juros (Selic)",
     message: `Selic ${leitura} (${diffPp >= 0 ? "+" : ""}${diffPp.toFixed(2)} p.p. a.a. no período)`,
     status: "neutral",
+    sourceId: "ciclo-selic",
   };
 }
 

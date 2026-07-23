@@ -17,6 +17,26 @@ Construídos à mão em SVG (sem lib de gráficos), seguindo as especificações
 séries, e uma paleta categórica validada contra CVD/contraste (câmbio/Selic/IPCA cada
 um com sua cor fixa, nunca reaproveitada pra outra coisa).
 
+## Insights, calculadora e metodologia
+
+Além dos gráficos, o dashboard tem três peças pensadas pro uso de quem trabalha com clientes
+no dia a dia (assessor/gestor de investimentos):
+
+- **Leituras automáticas** (`lib/insights.ts` + `components/InsightsPanel.tsx`) — frases
+  prontas calculadas em cima das tabelas gold: juro real (Selic − IPCA pela fórmula de
+  Fisher), IPCA vs. meta do Banco Central, posição do câmbio no intervalo de 12 meses,
+  tendência de curto prazo e ciclo da Selic. Matemática direta, sem IA/ML.
+- **Calculadora** (`components/Calculator.tsx`) — conversor de câmbio e simulador de
+  rendimento (Selic, com IR regressivo), consultando a cotação/Selic **mais recentes** direto
+  da API do BCB a cada acesso, via `app/api/bcb/route.ts` (essa rota roda no servidor porque o
+  BCB bloqueia o User-Agent padrão de fetch e pra evitar CORS no navegador). Se a consulta
+  falhar, cai pro último valor do histórico com aviso visual — nunca mostra número sem dizer
+  se é ao vivo ou não.
+- **Metodologia** (`app/metodologia/page.tsx` + `lib/methodology.ts`) — página pública com
+  toda fonte (código da série SGS) e toda fórmula usada no site. Cada leitura automática e a
+  calculadora linkam pra seção correspondente, pra qualquer número aqui ser rastreável até a
+  fonte oficial.
+
 ## Como rodar localmente
 
 ```bash

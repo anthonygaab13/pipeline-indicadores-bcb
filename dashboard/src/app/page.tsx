@@ -2,12 +2,13 @@ import { loadCambio, loadMensal, loadSelic, loadStats } from "@/lib/data";
 import { computeInsights } from "@/lib/insights";
 import { StatTile } from "@/components/StatTile";
 import { InsightsPanel } from "@/components/InsightsPanel";
+import { Calculator } from "@/components/Calculator";
 import { CambioSection } from "@/components/CambioSection";
 import { LineChart } from "@/components/charts/LineChart";
 import { ComboChart } from "@/components/charts/ComboChart";
 import { DataTable } from "@/components/DataTable";
 import { ArchitectureSection } from "@/components/ArchitectureSection";
-import { ArrowLeftIcon, ArrowUpRightIcon, GithubIcon } from "@/components/icons";
+import { ArrowLeftIcon, ArrowUpRightIcon, BookOpenIcon, GithubIcon } from "@/components/icons";
 import { formatDateFull } from "@/components/charts/chart-utils";
 
 const REPO_URL = "https://github.com/anthonygaab13/pipeline-indicadores-bcb";
@@ -32,16 +33,22 @@ export default function Home() {
           <ArrowLeftIcon className="size-3.5" />
           Portfólio
         </a>
-        <a
-          href={REPO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm text-foreground transition-colors hover:border-foreground/30"
-        >
-          <GithubIcon className="size-4" />
-          Repositório
-          <ArrowUpRightIcon className="size-3.5 text-muted-foreground" />
-        </a>
+        <div className="flex items-center gap-3">
+          <a href="/metodologia" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
+            <BookOpenIcon className="size-3.5" />
+            Metodologia
+          </a>
+          <a
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm text-foreground transition-colors hover:border-foreground/30"
+          >
+            <GithubIcon className="size-4" />
+            Repositório
+            <ArrowUpRightIcon className="size-3.5 text-muted-foreground" />
+          </a>
+        </div>
       </div>
 
       <header className="mb-10">
@@ -54,7 +61,11 @@ export default function Home() {
           pipeline em arquitetura medallion e atualizados automaticamente toda semana.
         </p>
         <p className="mt-2 text-xs text-muted-foreground">
-          Período: {formatDateFull(stats.periodo_inicio)} — {formatDateFull(stats.periodo_fim)}
+          Período: {formatDateFull(stats.periodo_inicio)} — {formatDateFull(stats.periodo_fim)} · Fonte: Banco
+          Central do Brasil (SGS) ·{" "}
+          <a href="/metodologia" className="underline-offset-4 hover:text-foreground hover:underline">
+            ver metodologia
+          </a>
         </p>
       </header>
 
@@ -88,6 +99,21 @@ export default function Home() {
       <section className="mb-10">
         <h2 className="mb-3 text-sm font-medium text-foreground">Leituras automáticas</h2>
         <InsightsPanel insights={insights} />
+      </section>
+
+      <section className="mb-10">
+        <h2 className="mb-1 text-sm font-medium text-foreground">Calculadora</h2>
+        <p className="mb-3 text-xs text-muted-foreground">
+          Ferramentas rápidas de campo — câmbio e Selic direto da fonte oficial, sem precisar abrir planilha.
+        </p>
+        <Calculator
+          fallback={{
+            cambio: stats.cambio,
+            cambioData: stats.cambio_data,
+            selicDiaria: stats.selic,
+            selicData: stats.selic_data,
+          }}
+        />
       </section>
 
       <section className="mb-10 rounded-lg border border-border bg-card p-5">

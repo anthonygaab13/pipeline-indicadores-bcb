@@ -30,6 +30,12 @@ export function InsightsPanel({ insights }: { insights: Insight[] }) {
             </div>
             <h4 className="mt-1.5 text-sm font-medium text-foreground">{insight.title}</h4>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{insight.message}</p>
+            <a
+              href={`/metodologia#${insight.sourceId}`}
+              className="mt-2 inline-block text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+            >
+              Fonte e metodologia →
+            </a>
           </div>
         );
       })}
