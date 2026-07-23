@@ -1,5 +1,7 @@
 import { loadCambio, loadMensal, loadSelic, loadStats } from "@/lib/data";
+import { computeInsights } from "@/lib/insights";
 import { StatTile } from "@/components/StatTile";
+import { InsightsPanel } from "@/components/InsightsPanel";
 import { CambioSection } from "@/components/CambioSection";
 import { LineChart } from "@/components/charts/LineChart";
 import { ComboChart } from "@/components/charts/ComboChart";
@@ -21,6 +23,7 @@ export default function Home() {
   const selic = loadSelic();
   const mensal = loadMensal();
   const stats = loadStats();
+  const insights = computeInsights(stats, cambio, mensal);
 
   return (
     <main className="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
@@ -80,6 +83,11 @@ export default function Home() {
           sparkline={mensal.slice(-12).map((d) => d.ipca_acumulado_12m)}
           accentColor="var(--series-ipca)"
         />
+      </section>
+
+      <section className="mb-10">
+        <h2 className="mb-3 text-sm font-medium text-foreground">Leituras automáticas</h2>
+        <InsightsPanel insights={insights} />
       </section>
 
       <section className="mb-10 rounded-lg border border-border bg-card p-5">
