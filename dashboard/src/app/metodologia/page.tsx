@@ -21,10 +21,8 @@ export default function MetodologiaPage() {
       </Link>
 
       <header className="mb-10">
-        <p className="font-mono text-xs tracking-wider text-primary uppercase">
-          <span aria-hidden>{"> "}</span>Transparência
-        </p>
-        <h1 className="mt-1 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Fontes e metodologia</h1>
+        <p className="font-mono text-xs tracking-wider text-primary uppercase">Transparência</p>
+        <h1 className="mt-1 font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Fontes e metodologia</h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Todo número mostrado neste dashboard é rastreável até aqui: qual série oficial ele usa e qual conta foi
           feita em cima dela. Nada é estimado por IA/modelo: são fórmulas fixas e auditáveis, documentadas abaixo.

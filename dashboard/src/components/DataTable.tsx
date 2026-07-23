@@ -42,7 +42,7 @@ export function DataTable({ rows }: { rows: MensalPoint[] }) {
             </thead>
             <tbody>
               {ordered.map((r) => (
-                <tr key={r.mes} className="border-t border-border tabular-nums">
+                <tr key={r.mes} className="border-t border-border font-mono tabular-nums">
                   <td className="px-3 py-1.5 text-foreground">{formatDateShort(r.mes.slice(0, 7))}</td>
                   <td className="px-3 py-1.5 text-muted-foreground">{fmt(r.cambio_medio)}</td>
                   <td className="px-3 py-1.5 text-muted-foreground">{fmt(r.cambio_fechamento)}</td>

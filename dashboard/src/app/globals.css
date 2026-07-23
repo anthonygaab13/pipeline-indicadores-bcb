@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
-/* Dashboard sempre no tema escuro (sem toggle) — identidade "Terminal": preto quase puro,
-   verde fósforo como acento principal, âmbar como acento secundário (delta/atenção), tudo
-   monoespaçado (ver layout.tsx, JetBrains Mono). Escolhida entre 3 direções comparadas
-   visualmente lado a lado com dado real (Boletim institucional / Terminal / Cédula) — a
-   mais ousada e menos parecida com o "dashboard escuro com glow azul/violeta" que hoje é
-   praticamente o padrão genérico de qualquer produto que tenta parecer premium. As cores
-   de série (câmbio/Selic/IPCA) continuam as mesmas já validadas por acessibilidade
-   (CVD + contraste, skill de dataviz, revalidado contra o novo fundo) — só a "pele" ao
-   redor delas mudou, não a paleta que carrega dado. */
+/* Dashboard sempre no tema escuro (sem toggle) — identidade "Terminal", versão enxuta:
+   preto quase puro, verde fósforo como acento principal, âmbar como acento secundário
+   (delta/atenção). Mono só em título/dado/label (ver layout.tsx) — o corpo do texto usa
+   uma sans limpa (IBM Plex Sans), porque parágrafo inteiro em monoespaçada lê como
+   poluído, não como profissional. Primeira versão empilhava demais: colchete no label, //
+   no status, borda tracejada, scanline de fundo — tudo isso saiu; sobrou só o que carrega
+   identidade sem virar ruído (cantos retos, mono nos números, Δ no delta, cursor piscando
+   só no hero). As cores de série (câmbio/Selic/IPCA) continuam as mesmas já validadas por
+   acessibilidade (CVD + contraste, skill de dataviz) — só a "pele" ao redor mudou. */
 :root {
   --background: #050706;
   /* Translúcido com leve matiz verde (não mais branco) — mesmo papel de antes: todo card
@@ -42,7 +42,7 @@
   --color-series-cambio: var(--series-cambio);
   --color-series-selic: var(--series-selic);
   --color-series-ipca: var(--series-ipca);
-  --font-sans: var(--font-jetbrains-mono);
+  --font-sans: var(--font-plex-sans);
   --font-mono: var(--font-jetbrains-mono);
   /* Painéis retos, não arredondados — o "rounded-lg em tudo" é a marca registrada de
      qualquer dashboard genérico feito às pressas. Cantos quase retos leem como janela de
@@ -53,13 +53,10 @@
 }
 
 body {
-  /* Sem glow colorido de fundo — terminal é chapado. Só uma vinheta verde quase
-     imperceptível (profundidade mínima) e um scanline sutil fixo no viewport. */
-  background:
-    radial-gradient(60% 50% at 15% 0%, var(--glow-1), transparent 70%),
-    repeating-linear-gradient(180deg, transparent 0px, transparent 2px, rgba(62, 242, 160, 0.025) 3px),
-    var(--background);
-  background-attachment: fixed, fixed, fixed;
+  /* Chapado de propósito — sem scanline, sem textura: aquilo lá deixava tudo com uma
+     leve neblina por cima do texto. Só uma vinheta verde quase imperceptível. */
+  background: radial-gradient(60% 50% at 15% 0%, var(--glow-1), transparent 70%), var(--background);
+  background-attachment: fixed;
   color: var(--foreground);
 }
 

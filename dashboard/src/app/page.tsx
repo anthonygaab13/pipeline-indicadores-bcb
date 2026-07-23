@@ -58,10 +58,8 @@ export default function Home() {
       </div>
 
       <header className="mb-10">
-        <p className="font-mono text-xs tracking-wider text-primary uppercase">
-          <span aria-hidden>{"> "}</span>Pipeline de Dados · BCB
-        </p>
-        <h1 className="mt-1 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+        <p className="font-mono text-xs tracking-wider text-primary uppercase">Pipeline de Dados · BCB</p>
+        <h1 className="mt-1 font-mono text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           Indicadores <span className="text-gradient-accent">Financeiros</span> do Banco Central
           <span className="cursor-blink" aria-hidden />
         </h1>

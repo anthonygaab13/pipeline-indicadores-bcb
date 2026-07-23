@@ -69,7 +69,7 @@ export function ComboChart({
           return (
             <g key={t}>
               <line x1={PAD.left} x2={VB_WIDTH - PAD.right} y1={y} y2={y} stroke="var(--border)" strokeWidth={1} />
-              <text x={PAD.left - 8} y={y + 3} textAnchor="end" className="fill-muted-foreground text-[10px] tabular-nums">
+              <text x={PAD.left - 8} y={y + 3} textAnchor="end" className="fill-muted-foreground font-mono text-[10px] tabular-nums">
                 {formatValue(t, yFormat)}
               </text>
             </g>
@@ -77,7 +77,7 @@ export function ComboChart({
         })}
 
         {xTicks.map((idx) => (
-          <text key={idx} x={scaleX(idx, xLabels.length)} y={VB_HEIGHT - 8} textAnchor="middle" className="fill-muted-foreground text-[10px]">
+          <text key={idx} x={scaleX(idx, xLabels.length)} y={VB_HEIGHT - 8} textAnchor="middle" className="fill-muted-foreground font-mono text-[10px]">
             {formatDateShort(xLabels[idx])}
           </text>
         ))}
@@ -133,14 +133,14 @@ export function ComboChart({
               <span className="inline-block h-2.5 w-2.5 rounded-[2px]" style={{ backgroundColor: barColor }} aria-hidden />
               {barLabel}
             </span>
-            <span className="font-semibold text-foreground">{formatValue(bars[hoverIndex], yFormat)}</span>
+            <span className="font-mono font-semibold text-foreground">{formatValue(bars[hoverIndex], yFormat)}</span>
           </p>
           <p className="flex items-center justify-between gap-3 tabular-nums">
             <span className="flex items-center gap-1.5 text-muted-foreground">
               <span className="inline-block h-[2px] w-3 rounded-full" style={{ backgroundColor: lineColor }} aria-hidden />
               {lineLabel}
             </span>
-            <span className="font-semibold text-foreground">{formatValue(line[hoverIndex], yFormat)}</span>
+            <span className="font-mono font-semibold text-foreground">{formatValue(line[hoverIndex], yFormat)}</span>
           </p>
         </div>
       )}

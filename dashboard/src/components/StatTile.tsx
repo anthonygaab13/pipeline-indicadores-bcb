@@ -75,25 +75,17 @@ export function StatTile({
 
   return (
     <div className="rounded-lg border border-border bg-card p-4">
-      <p className="text-xs text-muted-foreground">
-        <span className="text-muted-foreground/50" aria-hidden>
-          [{" "}
-        </span>
-        {label}
-        <span className="text-muted-foreground/50" aria-hidden>
-          {" "}]
-        </span>
-      </p>
+      <p className="font-mono text-xs text-muted-foreground">{label}</p>
       <div className="mt-1.5 flex items-end justify-between gap-2">
         <div className="min-w-0">
           <p
-            className="text-xl font-semibold text-foreground whitespace-nowrap"
+            className="font-mono text-xl font-semibold text-foreground whitespace-nowrap"
             style={{ textShadow: `0 0 20px color-mix(in srgb, ${accentColor} 45%, transparent)` }}
           >
             <AnimatedNumber value={numericValue} decimals={decimals} prefix={prefix} suffix={suffix} />
           </p>
           {deltaLabel && (
-            <p className={`mt-0.5 text-xs tabular-nums ${deltaColor}`}>
+            <p className={`mt-0.5 font-mono text-xs tabular-nums ${deltaColor}`}>
               <span aria-hidden>Δ </span>
               {deltaLabel}
             </p>

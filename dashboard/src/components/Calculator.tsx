@@ -139,10 +139,10 @@ function ConversorCambio({ cambio, cambioData }: { cambio: number; cambioData: s
         step="0.01"
         value={valor}
         onChange={(e) => setValor(Math.max(0, Number(e.target.value) || 0))}
-        className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground tabular-nums focus:outline-none focus:ring-2 focus:ring-primary/40"
+        className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 font-mono text-sm text-foreground tabular-nums focus:outline-none focus:ring-2 focus:ring-primary/40"
       />
 
-      <p className="mt-3 text-2xl font-semibold text-foreground tabular-nums">
+      <p className="mt-3 font-mono text-2xl font-semibold text-foreground tabular-nums">
         ≈ {direcao === "BRL_PARA_USD" ? usd.format(resultado) : brl.format(resultado)}
       </p>
       <p className="mt-1 text-xs text-muted-foreground">
@@ -173,7 +173,7 @@ function SimuladorRendimento({ selicDiaria, selicData }: { selicDiaria: number; 
         step="0.01"
         value={valor}
         onChange={(e) => setValor(Math.max(0, Number(e.target.value) || 0))}
-        className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground tabular-nums focus:outline-none focus:ring-2 focus:ring-primary/40"
+        className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 font-mono text-sm text-foreground tabular-nums focus:outline-none focus:ring-2 focus:ring-primary/40"
       />
 
       <label className="mt-3 block text-xs text-muted-foreground" htmlFor="sim-dias">
@@ -185,7 +185,7 @@ function SimuladorRendimento({ selicDiaria, selicData }: { selicDiaria: number; 
         min={1}
         value={dias}
         onChange={(e) => setDias(Math.max(1, Number(e.target.value) || 1))}
-        className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground tabular-nums focus:outline-none focus:ring-2 focus:ring-primary/40"
+        className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 font-mono text-sm text-foreground tabular-nums focus:outline-none focus:ring-2 focus:ring-primary/40"
       />
       <div className="mt-2 flex flex-wrap gap-1.5">
         {PRAZOS_RAPIDOS.map((p) => (
@@ -193,7 +193,7 @@ function SimuladorRendimento({ selicDiaria, selicData }: { selicDiaria: number; 
             key={p}
             type="button"
             onClick={() => setDias(p)}
-            className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${
+            className={`rounded-full border px-2.5 py-1 font-mono text-xs transition-colors ${
               dias === p ? "border-primary text-primary" : "border-border text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -205,15 +205,15 @@ function SimuladorRendimento({ selicDiaria, selicData }: { selicDiaria: number; 
       <dl className="mt-4 space-y-1.5 text-sm">
         <div className="flex items-baseline justify-between">
           <dt className="text-muted-foreground">Bruto</dt>
-          <dd className="tabular-nums text-foreground">{brl.format(resultado.bruto)}</dd>
+          <dd className="font-mono tabular-nums text-foreground">{brl.format(resultado.bruto)}</dd>
         </div>
         <div className="flex items-baseline justify-between">
           <dt className="text-muted-foreground">IR ({resultado.aliquotaIR}%)</dt>
-          <dd className="tabular-nums text-muted-foreground">− {brl.format(resultado.imposto)}</dd>
+          <dd className="font-mono tabular-nums text-muted-foreground">− {brl.format(resultado.imposto)}</dd>
         </div>
         <div className="flex items-baseline justify-between border-t border-border pt-1.5">
           <dt className="font-medium text-foreground">Líquido</dt>
-          <dd className="text-lg font-semibold tabular-nums text-foreground">{brl.format(resultado.liquido)}</dd>
+          <dd className="font-mono text-lg font-semibold tabular-nums text-foreground">{brl.format(resultado.liquido)}</dd>
         </div>
       </dl>
 

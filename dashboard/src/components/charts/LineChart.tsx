@@ -120,7 +120,7 @@ export function LineChart({
                 stroke="var(--border)"
                 strokeWidth={1}
               />
-              <text x={PAD.left - 8} y={y + 3} textAnchor="end" className="fill-muted-foreground text-[10px] tabular-nums">
+              <text x={PAD.left - 8} y={y + 3} textAnchor="end" className="fill-muted-foreground font-mono text-[10px] tabular-nums">
                 {formatValue(t, yFormat)}
               </text>
             </g>
@@ -133,7 +133,7 @@ export function LineChart({
             x={scaleX(idx, xLabels.length)}
             y={VB_HEIGHT - 8}
             textAnchor="middle"
-            className="fill-muted-foreground text-[10px]"
+            className="fill-muted-foreground font-mono text-[10px]"
           >
             {formatDateShort(xLabels[idx])}
           </text>
@@ -209,7 +209,7 @@ export function LineChart({
                   />
                   {s.label}
                 </span>
-                <span className="font-semibold text-foreground">{v === null ? "—" : formatValue(v, yFormat)}</span>
+                <span className="font-mono font-semibold text-foreground">{v === null ? "—" : formatValue(v, yFormat)}</span>
               </p>
             );
           })}
