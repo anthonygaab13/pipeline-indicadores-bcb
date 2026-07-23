@@ -1,28 +1,30 @@
 @import "tailwindcss";
 
-/* Dashboard sempre no tema escuro (sem toggle) — identidade "Terminal", versão enxuta:
-   preto quase puro, verde fósforo como acento principal, âmbar como acento secundário
-   (delta/atenção). Mono só em título/dado/label (ver layout.tsx) — o corpo do texto usa
-   uma sans limpa (IBM Plex Sans), porque parágrafo inteiro em monoespaçada lê como
-   poluído, não como profissional. Primeira versão empilhava demais: colchete no label, //
-   no status, borda tracejada, scanline de fundo — tudo isso saiu; sobrou só o que carrega
-   identidade sem virar ruído (cantos retos, mono nos números, Δ no delta, cursor piscando
-   só no hero). As cores de série (câmbio/Selic/IPCA) continuam as mesmas já validadas por
-   acessibilidade (CVD + contraste, skill de dataviz) — só a "pele" ao redor mudou. */
+/* Dashboard sempre no tema escuro (sem toggle) — identidade "Boletim": azul-tinta quase
+   preto, verde institucional como acento principal, dourado como acento secundário
+   (detalhe, número de seção). Terceira parada nessa busca de identidade: Aurora leu
+   genérico, Terminal (mono + verde fósforo) leu juvenil demais pra um produto financeiro.
+   Boletim é a mais contida das três direções comparadas com dado real — modelada num
+   relatório oficial, não num app de trading. Fraunces (serifada) só em título e nos
+   números grandes dos StatTiles; o corpo do texto usa IBM Plex Sans; IBM Plex Mono fica
+   reservado pra eyebrow, rótulo e dado tabular (ver layout.tsx) — cada fonte tem um papel,
+   nenhuma delas é "a fonte do site inteiro". As cores de série (câmbio/Selic/IPCA)
+   continuam as mesmas já validadas por acessibilidade (CVD + contraste, skill de
+   dataviz, revalidado contra o novo fundo) — só a "pele" ao redor mudou. */
 :root {
-  --background: #050706;
-  /* Translúcido com leve matiz verde (não mais branco) — mesmo papel de antes: todo card
-     com bg-card herda isso (ver `.bg-card` abaixo). */
-  --card: rgba(62, 242, 160, 0.04);
-  --foreground: #e8fff2;
-  --muted-foreground: #6f9683;
-  --border: rgba(62, 242, 160, 0.16);
-  --primary: #3ef2a0;
-  --primary-foreground: #04140c;
-  /* Acento secundário (delta, atenção, cursor) — âmbar, não é cor de série,
+  --background: #0a0e1a;
+  /* Translúcido com leve matiz dourado — mesmo papel de antes: todo card com bg-card
+     herda isso (ver `.bg-card` abaixo). */
+  --card: rgba(201, 162, 75, 0.045);
+  --foreground: #eef1f7;
+  --muted-foreground: #8b95ad;
+  --border: rgba(201, 162, 75, 0.18);
+  --primary: #2fa876;
+  --primary-foreground: #06120c;
+  /* Acento secundário (número de seção, detalhe, hairline) — dourado, não é cor de série,
      nunca usar em gráfico (ver color-formula.md da skill de dataviz). */
-  --accent-2: #ffb020;
-  --glow-1: rgba(62, 242, 160, 0.08);
+  --accent-2: #c9a24b;
+  --glow-1: rgba(47, 168, 118, 0.1);
 
   /* Cores de série dos gráficos — não usar essas cores em texto (ver marks-and-anatomy) */
   --series-cambio: #0093d5;
@@ -43,58 +45,47 @@
   --color-series-selic: var(--series-selic);
   --color-series-ipca: var(--series-ipca);
   --font-sans: var(--font-plex-sans);
-  --font-mono: var(--font-jetbrains-mono);
-  /* Painéis retos, não arredondados — o "rounded-lg em tudo" é a marca registrada de
-     qualquer dashboard genérico feito às pressas. Cantos quase retos leem como janela de
-     terminal de verdade. rounded-full fica de fora de propósito (ainda serve pra círculo/pill:
-     avatar, dot de status, badges). */
-  --radius-lg: 0.125rem;
-  --radius-md: 0.125rem;
+  --font-mono: var(--font-plex-mono);
+  --font-serif: var(--font-fraunces);
+  /* Painéis quase retos — nada de rounded-lg genérico, mas também sem a agressividade
+     0px do terminal. 3px lê como cartão de relatório, não como janela de app. */
+  --radius-lg: 0.1875rem;
+  --radius-md: 0.1875rem;
 }
 
 body {
-  /* Chapado de propósito — sem scanline, sem textura: aquilo lá deixava tudo com uma
-     leve neblina por cima do texto. Só uma vinheta verde quase imperceptível. */
-  background: radial-gradient(60% 50% at 15% 0%, var(--glow-1), transparent 70%), var(--background);
-  background-attachment: fixed;
+  /* Vinheta verde bem suave no canto superior esquerdo + leve gradiente vertical de
+     profundidade — chapado o bastante pra não competir com o texto, mas não é um
+     retângulo morto. */
+  background:
+    radial-gradient(70% 50% at 18% -8%, var(--glow-1), transparent 65%),
+    linear-gradient(180deg, #0c1120 0%, var(--background) 420px);
+  background-attachment: fixed, scroll;
   color: var(--foreground);
 }
 
-/* Todo elemento que usa a utilitária bg-card ganha o hairline + leve realce interno —
-   sem blur (glassmorphism não combina com painel de terminal, que é chapado). */
+/* Todo elemento que usa a utilitária bg-card ganha o hairline dourado + leve realce
+   interno — sem blur (o site não usa mais glassmorphism). */
 .bg-card {
   box-shadow:
-    0 1px 0 rgba(62, 242, 160, 0.06) inset,
-    0 16px 32px -28px rgba(62, 242, 160, 0.14);
+    0 1px 0 rgba(201, 162, 75, 0.08) inset,
+    0 16px 32px -28px rgba(0, 0, 0, 0.5);
 }
 
-/* Destaque de acento no texto (palavra-chave do hero) — verde fósforo sólido, sem
-   gradiente: a direção "Terminal" não usa degradê em texto, só cor + o cursor piscando. */
+/* Destaque de acento no texto (palavra-chave do hero) — itálico na mesma serifada do
+   título (ver font-serif no h1), num verde mais claro que o --primary. Sem gradiente:
+   um único itálico colorido já é uma pausa visual suficiente numa manchete serifada. */
 .text-gradient-accent {
-  color: var(--primary);
+  font-style: italic;
+  color: #6fd4a8;
 }
 
-/* Cursor de bloco piscando — flourish reservado pro hero (usar em só um lugar por página,
-   ver artifact-design skill: "spend your boldness in one place"). Para de piscar com
-   prefers-reduced-motion (fica sólido, sem gerar movimento). */
-.cursor-blink {
-  display: inline-block;
-  width: 0.55em;
-  height: 0.85em;
-  margin-left: 0.08em;
-  background: var(--primary);
-  vertical-align: -0.12em;
-  animation: cursor-blink 1.1s steps(1) infinite;
-}
-@keyframes cursor-blink {
-  50% {
-    opacity: 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cursor-blink {
-    animation: none;
-  }
+/* Régua fina que separa o cabeçalho do resto da página — desvanece pra transparente,
+   como uma linha de rodapé de boletim impresso. Único flourish "editorial" do layout,
+   usado uma vez por página (ver artifact-design skill: boldness num lugar só). */
+.rule-fade {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201, 162, 75, 0.5), rgba(201, 162, 75, 0) 75%);
 }
 
 /* Números em colunas/eixos alinham pela largura do dígito; texto normal não. */

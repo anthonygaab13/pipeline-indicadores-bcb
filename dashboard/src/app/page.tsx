@@ -59,9 +59,8 @@ export default function Home() {
 
       <header className="mb-10">
         <p className="font-mono text-xs tracking-wider text-primary uppercase">Pipeline de Dados · BCB</p>
-        <h1 className="mt-1 font-mono text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+        <h1 className="mt-1 font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           Indicadores <span className="text-gradient-accent">Financeiros</span> do Banco Central
-          <span className="cursor-blink" aria-hidden />
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Câmbio (USD/BRL), Selic e IPCA extraídos da API pública do Banco Central, tratados numa
@@ -74,6 +73,7 @@ export default function Home() {
             ver metodologia
           </a>
         </p>
+        <div className="rule-fade mt-6" />
       </header>
 
       <Reveal>

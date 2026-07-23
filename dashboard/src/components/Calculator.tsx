@@ -142,7 +142,7 @@ function ConversorCambio({ cambio, cambioData }: { cambio: number; cambioData: s
         className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 font-mono text-sm text-foreground tabular-nums focus:outline-none focus:ring-2 focus:ring-primary/40"
       />
 
-      <p className="mt-3 font-mono text-2xl font-semibold text-foreground tabular-nums">
+      <p className="mt-3 font-serif text-2xl font-semibold text-foreground tabular-nums">
         ≈ {direcao === "BRL_PARA_USD" ? usd.format(resultado) : brl.format(resultado)}
       </p>
       <p className="mt-1 text-xs text-muted-foreground">
@@ -213,7 +213,7 @@ function SimuladorRendimento({ selicDiaria, selicData }: { selicDiaria: number; 
         </div>
         <div className="flex items-baseline justify-between border-t border-border pt-1.5">
           <dt className="font-medium text-foreground">Líquido</dt>
-          <dd className="font-mono text-lg font-semibold tabular-nums text-foreground">{brl.format(resultado.liquido)}</dd>
+          <dd className="font-serif text-lg font-semibold tabular-nums text-foreground">{brl.format(resultado.liquido)}</dd>
         </div>
       </dl>
 

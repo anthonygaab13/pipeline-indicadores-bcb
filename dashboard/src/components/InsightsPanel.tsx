@@ -3,7 +3,8 @@
 //
 // Cores de status seguem a paleta fixa "good/warning/serious/critical" da skill de dataviz
 // (nunca reaproveitada pra série de gráfico) e vêm sempre acompanhadas de ícone + rótulo em
-// texto — nunca só a cor — pra quem não distingue bem cor também identificar o status.
+// texto — nunca só a cor — pra quem não distingue bem cor também identificar o status. A
+// barra à esquerda do card repete a mesma cor do ícone/rótulo (reforço, não decoração nova).
 
 import type { ComponentType, SVGProps } from "react";
 import type { Insight, InsightStatus } from "@/lib/insights";
@@ -23,7 +24,11 @@ export function InsightsPanel({ insights }: { insights: Insight[] }) {
         const meta = STATUS_META[insight.status];
         const Icon = meta.icon;
         return (
-          <div key={insight.id} className="rounded-lg border border-border bg-card p-4">
+          <div
+            key={insight.id}
+            className="rounded-lg border border-border border-l-[3px] bg-card p-4"
+            style={{ borderLeftColor: meta.color === "var(--muted-foreground)" ? "var(--border)" : meta.color }}
+          >
             <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: meta.color }}>
               <Icon className="size-3.5 shrink-0" />
               {meta.label}

@@ -14,6 +14,12 @@ export const devlog: DevlogEntry[] = [
   {
     date: "2026-07-23",
     tag: "Design",
+    title: "Terminal virou Boletim",
+    body: "O Terminal (mono, verde fósforo em preto) ficou bonito, mas errei a mão: pareceu mais projeto pessoal de fim de semana do que produto financeiro sério, e esse não é o tom que eu quero passar. Voltei pras três direções que já tinha comparado e fui pra mais sóbria das três: azul-tinta quase preto, verde institucional discreto, dourado só como detalhe. Serifada (Fraunces) reservada pro título e pros números grandes, o resto do texto numa sans limpa, mono só em rótulo e dado tabular. Aprendizado: identidade visual forte não é sinônimo de identidade visual ruidosa.",
+  },
+  {
+    date: "2026-07-23",
+    tag: "Design",
     title: "Aurora virou Terminal",
     body: "Mesmo depois de trocar a pele pra Aurora, ainda achava o resultado meio básico: o \"dark com glow azul/violeta\" é praticamente o padrão de qualquer produto tentando parecer premium hoje em dia. Comparei de novo três direções com dado real (um boletim institucional, um terminal e uma inspirada na cédula do Real) e fui pra mais ousada das três. Trocado o Geist por uma única fonte monoespaçada no site inteiro, cantos retos em vez de rounded-lg em tudo, labels entre colchetes, delta com Δ, leitura automática com prefixo //. Menos parecido com dashboard genérico de IA, mais parecido com uma ferramenta de verdade.",
   },

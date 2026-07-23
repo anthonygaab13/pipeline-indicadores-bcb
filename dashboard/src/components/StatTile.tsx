@@ -1,11 +1,13 @@
-// Stat tile: label entre colchetes (identidade "Terminal") + valor em destaque (com leve
-// glow no acento) + delta prefixado com Δ + sparkline com preenchimento em gradiente. Segue
-// o contrato de "Figures" da skill de dataviz — número em fonte proporcional (não tabular),
-// delta assinado, sparkline no tom de baixa ênfase com o trecho atual em destaque.
+// Stat tile: label em mono (identidade "Boletim") + valor grande em serifada (Fraunces,
+// mesma família do título — trata o número como manchete) + delta prefixado com Δ +
+// sparkline com preenchimento em gradiente. Barra de acento à esquerda usa a cor da
+// própria série (accentColor), reforçando a mesma cor do sparkline e do glow. Segue o
+// contrato de "Figures" da skill de dataviz — delta assinado, sparkline no tom de baixa
+// ênfase com o trecho atual em destaque.
 //
-// SPARK_W enxuto de propósito: o JetBrains Mono é mais largo por caractere que uma fonte
-// proporcional, então o valor (ex: "R$ 5.0638") precisa de mais espaço na mesma largura de
-// card do que precisava antes — reduzir a sparkline é mais barato que estourar o layout.
+// SPARK_W enxuto de propósito: sobra menos largura pro valor no mesmo card do que na
+// versão anterior (Geist Sans), então reduzir a sparkline é mais barato que estourar
+// o layout com o valor quebrando linha.
 
 import { useId } from "react";
 import { AnimatedNumber } from "./AnimatedNumber";
@@ -74,12 +76,12 @@ export function StatTile({
           : "text-[#d03b3b]";
 
   return (
-    <div className="rounded-lg border border-border bg-card p-4">
+    <div className="rounded-lg border border-border border-l-[3px] bg-card p-4" style={{ borderLeftColor: accentColor }}>
       <p className="font-mono text-xs text-muted-foreground">{label}</p>
       <div className="mt-1.5 flex items-end justify-between gap-2">
         <div className="min-w-0">
           <p
-            className="font-mono text-xl font-semibold text-foreground whitespace-nowrap"
+            className="font-serif text-xl font-semibold text-foreground whitespace-nowrap"
             style={{ textShadow: `0 0 20px color-mix(in srgb, ${accentColor} 45%, transparent)` }}
           >
             <AnimatedNumber value={numericValue} decimals={decimals} prefix={prefix} suffix={suffix} />

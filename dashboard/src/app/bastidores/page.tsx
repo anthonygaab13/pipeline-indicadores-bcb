@@ -22,13 +22,14 @@ export default function BastidoresPage() {
 
       <header className="mb-12">
         <p className="font-mono text-xs tracking-wider text-primary uppercase">Bastidores</p>
-        <h1 className="mt-1 font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="mt-1 font-serif text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           Diário de <span className="text-gradient-accent">bordo</span>
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Não é changelog técnico: é o porquê por trás de cada decisão, contado do jeito que aconteceu de verdade,
           erros incluídos. Atualizo conforme o projeto (e os próximos) avançam.
         </p>
+        <div className="rule-fade mt-6" />
       </header>
 
       <ol className="relative space-y-10 border-l border-border pl-7">
