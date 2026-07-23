@@ -9,7 +9,7 @@ import { ComboChart } from "@/components/charts/ComboChart";
 import { DataTable } from "@/components/DataTable";
 import { ArchitectureSection } from "@/components/ArchitectureSection";
 import { AboutSection } from "@/components/AboutSection";
-import { ArrowLeftIcon, ArrowUpRightIcon, BookOpenIcon, GithubIcon } from "@/components/icons";
+import { ArrowLeftIcon, ArrowUpRightIcon, BookOpenIcon, GithubIcon, NotebookIcon } from "@/components/icons";
 import { formatDateFull } from "@/components/charts/chart-utils";
 
 const REPO_URL = "https://github.com/anthonygaab13/pipeline-indicadores-bcb";
@@ -35,6 +35,10 @@ export default function Home() {
           Portfólio
         </a>
         <div className="flex items-center gap-3">
+          <a href="/bastidores" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
+            <NotebookIcon className="size-3.5" />
+            Bastidores
+          </a>
           <a href="/metodologia" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
             <BookOpenIcon className="size-3.5" />
             Metodologia

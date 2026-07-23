@@ -97,3 +97,16 @@ export function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+// Usado no link pra página /bastidores (nav do topo e seção Sobre) — um caderno/diário.
+export function NotebookIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden {...props}>
+      <rect x="4" y="3" width="16" height="18" rx="2" />
+      <path d="M8 3v18" />
+      <path d="M12 8h5" />
+      <path d="M12 12h5" />
+      <path d="M12 16h3" />
+    </svg>
+  );
+}

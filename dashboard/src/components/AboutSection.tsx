@@ -71,12 +71,14 @@ export function AboutSection() {
             >
               <InstagramIcon className="size-5" />
             </a>
-            <a
-              href={LINKS.portfolio}
-              className="ml-auto text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-            >
-              Ver portfólio completo →
-            </a>
+            <div className="ml-auto flex items-center gap-4 text-xs">
+              <a href="/bastidores" className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                Diário de bordo →
+              </a>
+              <a href={LINKS.portfolio} className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                Portfólio completo →
+              </a>
+            </div>
           </div>
         </div>
       </div>
