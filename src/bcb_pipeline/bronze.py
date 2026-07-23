@@ -7,10 +7,10 @@ natural seria passar a paginar por data (dataInicial/dataFinal) e acumular incre
 """
 
 import polars as pl
-from deltalake import write_deltalake
 
 from bcb_pipeline.config import DATA_DIR, SERIES
 from bcb_pipeline.extract import fetch_series
+from bcb_pipeline.storage import write_overwrite
 
 
 def bronze_path(slug: str) -> str:
@@ -26,6 +26,6 @@ def run_bronze() -> dict[str, pl.DataFrame]:
     resultados: dict[str, pl.DataFrame] = {}
     for series in SERIES:
         df = fetch_series(series)
-        write_deltalake(bronze_path(series.slug), df.to_arrow(), mode="overwrite")
+        write_overwrite(bronze_path(series.slug), df.to_arrow())
         resultados[series.slug] = df
     return resultados

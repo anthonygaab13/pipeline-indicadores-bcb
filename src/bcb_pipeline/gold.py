@@ -96,11 +96,11 @@ def _queries(source: str) -> dict[str, str]:
 
 
 def run_gold() -> None:
-    from deltalake import write_deltalake
+    from bcb_pipeline.storage import write_overwrite
 
     con = _connect()
     source = f"delta_scan('{silver_path()}')"
     for nome, query in _queries(source).items():
         tabela = con.sql(query).arrow()
-        write_deltalake(gold_path(nome), tabela, mode="overwrite")
+        write_overwrite(gold_path(nome), tabela)
     con.close()

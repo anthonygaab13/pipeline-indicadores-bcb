@@ -10,10 +10,10 @@ Regras de negócio aplicadas aqui (a "tradução" de dado bruto pra dado confiá
 """
 
 import polars as pl
-from deltalake import write_deltalake
 
 from bcb_pipeline.config import DATA_DIR, SERIES
 from bcb_pipeline.bronze import bronze_path
+from bcb_pipeline.storage import write_overwrite
 
 
 def _clean_series(df: pl.DataFrame, nome: str) -> pl.DataFrame:
@@ -52,5 +52,5 @@ def run_silver(bronze_dfs: dict[str, pl.DataFrame] | None = None) -> pl.DataFram
         partes.append(_clean_series(raw, series.nome))
 
     indicadores = pl.concat(partes)
-    write_deltalake(silver_path(), indicadores.to_arrow(), mode="overwrite")
+    write_overwrite(silver_path(), indicadores.to_arrow())
     return indicadores
