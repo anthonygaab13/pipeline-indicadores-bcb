@@ -1,5 +1,23 @@
 # Pipeline de Indicadores Financeiros — Banco Central (BCB)
 
+[![CI](https://github.com/anthonygaab13/pipeline-indicadores-bcb/actions/workflows/ci.yml/badge.svg)](https://github.com/anthonygaab13/pipeline-indicadores-bcb/actions/workflows/ci.yml)
+[![Atualização automática](https://github.com/anthonygaab13/pipeline-indicadores-bcb/actions/workflows/refresh-data.yml/badge.svg)](https://github.com/anthonygaab13/pipeline-indicadores-bcb/actions/workflows/refresh-data.yml)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Polars](https://img.shields.io/badge/Polars-CD792C?style=flat&logo=polars&logoColor=white)
+![DuckDB](https://img.shields.io/badge/DuckDB-FFF000?style=flat&logo=duckdb&logoColor=black)
+![Delta Lake](https://img.shields.io/badge/Delta%20Lake-00ADD4?style=flat&logo=delta&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
+
+<!-- Esses dois primeiros badges são "vivos": puxam o status real do último run de cada
+     workflow direto do GitHub Actions — se o CI ou a atualização semanal quebrar, o badge
+     vira vermelho sozinho, sem precisar editar nada aqui. Os de baixo (Python, Polars...) são
+     só visuais/estáticos, mostram a stack pra quem chega no repositório sem precisar ler o
+     código. Servem também pra compensar o indicador de "linguagem principal" do GitHub, que
+     nesse repositório mostra só TypeScript (o dashboard tem mais bytes de código que o
+     pipeline em Python) mesmo a parte de dados sendo Python de ponta a ponta. -->
+
 Pipeline de dados em arquitetura **medallion** (bronze → silver → gold) que extrai, limpa
 e agrega três indicadores financeiros públicos do Banco Central do Brasil: **câmbio
 (USD/BRL)**, **Selic** e **IPCA**.
