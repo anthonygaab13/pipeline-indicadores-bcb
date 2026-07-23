@@ -1,0 +1,29 @@
+[project]
+name = "bcb-pipeline"
+version = "0.1.0"
+description = "Pipeline de dados (bronze/silver/gold) para indicadores financeiros do Banco Central do Brasil"
+requires-python = ">=3.11"
+dependencies = [
+    "polars>=1.9",
+    "duckdb>=1.1",
+    "deltalake>=0.20",
+    "requests>=2.32",
+    "pyarrow>=17.0", # necessário pra converter Polars/DuckDB <-> Arrow ao gravar tabelas Delta
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "responses>=0.25",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
