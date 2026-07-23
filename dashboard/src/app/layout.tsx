@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Indicadores BCB — Câmbio, Selic e IPCA",
+  title: "Indicadores BCB · Câmbio, Selic e IPCA",
   description:
     "Dashboard com câmbio (USD/BRL), Selic e IPCA a partir de um pipeline de dados em arquitetura medallion (bronze/silver/gold), por Anthony Gabriel.",
 };

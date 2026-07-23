@@ -8,7 +8,7 @@ import { methodology } from "@/lib/methodology";
 import { ArrowLeftIcon, ArrowUpRightIcon } from "@/components/icons";
 
 export const metadata = {
-  title: "Metodologia — Indicadores BCB",
+  title: "Metodologia · Indicadores BCB",
   description: "De onde vêm os dados e como cada número deste dashboard é calculado.",
 };
 

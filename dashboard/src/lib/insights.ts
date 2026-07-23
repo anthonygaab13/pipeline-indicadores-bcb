@@ -40,12 +40,12 @@ function insightJuroReal(stats: Stats): Insight {
       ? "negativo: a Selic não está cobrindo a inflação dos últimos 12 meses."
       : status === "warning"
         ? "positivo, mas moderado."
-        : "positivo e consistente — cenário favorável à renda fixa pré/pós-fixada.";
+        : "positivo e consistente: cenário favorável à renda fixa pré/pós-fixada.";
 
   return {
     id: "juro-real",
     title: "Juro real (Selic − IPCA)",
-    message: `Juro real em ${real.toFixed(2)}% a.a. — ${leitura}`,
+    message: `Juro real em ${real.toFixed(2)}% a.a., ${leitura}`,
     status,
     sourceId: "juro-real-fisher",
   };
@@ -70,7 +70,7 @@ function insightIpcaMeta(stats: Stats): Insight {
   return {
     id: "ipca-meta",
     title: "IPCA vs. meta do Banco Central",
-    message: `IPCA acumulado em 12 meses: ${v.toFixed(2)}% — ${leitura}`,
+    message: `IPCA acumulado em 12 meses: ${v.toFixed(2)}%, ${leitura}`,
     status,
     sourceId: "ipca-meta-cmn",
   };
@@ -100,7 +100,7 @@ function insightCambioRange(cambio: CambioPoint[]): Insight {
   return {
     id: "cambio-range",
     title: "Câmbio no intervalo de 12 meses",
-    message: `R$ ${atual.toFixed(4)} está no percentil ${percentil.toFixed(0)} da faixa de 12 meses (R$ ${min.toFixed(2)} – R$ ${max.toFixed(2)}) — ${leitura}`,
+    message: `R$ ${atual.toFixed(4)} está no percentil ${percentil.toFixed(0)} da faixa de 12 meses (R$ ${min.toFixed(2)} a R$ ${max.toFixed(2)}), ${leitura}`,
     status,
     sourceId: "cambio-range-percentil",
   };
@@ -125,8 +125,8 @@ function insightCambioTendencia(cambio: CambioPoint[]): Insight {
 
   const diffPct = ((m7 - m30) / m30) * 100;
   let leitura = "estável, sem tendência clara de curto prazo.";
-  if (diffPct > 0.3) leitura = "em alta — média de 7 dias acima da de 30 dias.";
-  else if (diffPct < -0.3) leitura = "em queda — média de 7 dias abaixo da de 30 dias.";
+  if (diffPct > 0.3) leitura = "em alta: média de 7 dias acima da de 30 dias.";
+  else if (diffPct < -0.3) leitura = "em queda: média de 7 dias abaixo da de 30 dias.";
 
   return {
     id: "cambio-tendencia",

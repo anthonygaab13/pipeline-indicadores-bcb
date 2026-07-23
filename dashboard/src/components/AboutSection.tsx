@@ -36,7 +36,7 @@ export function AboutSection() {
             </p>
             <p>
               Esse pipeline de indicadores do Banco Central é o primeiro de uma série de projetos que pretendo
-              construir em público — documentando o processo (erros incluídos), não só o resultado pronto. Quem
+              construir em público: documentando o processo (erros incluídos), não só o resultado pronto. Quem
               trabalha com câmbio, juros ou inflação no dia a dia sabe como é ter que caçar esses números em fontes
               espalhadas; foi esse tipo de fricção real que me fez querer construir algo assim.
             </p>

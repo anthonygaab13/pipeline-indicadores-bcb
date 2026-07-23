@@ -82,7 +82,7 @@ export function Calculator({ fallback }: { fallback: DadosMercado }) {
           {status === "ao-vivo" &&
             consultadoEm &&
             `Cotação ao vivo · consultada às ${new Date(consultadoEm).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`}
-          {status === "indisponivel" && "Banco Central indisponível agora — usando o último dado carregado no histórico."}
+          {status === "indisponivel" && "Banco Central indisponível agora. Usando o último dado carregado no histórico."}
         </span>
       </div>
 
@@ -219,7 +219,7 @@ function SimuladorRendimento({ selicDiaria, selicData }: { selicDiaria: number; 
 
       <p className="mt-3 text-xs text-muted-foreground">
         Selic: {anual.toFixed(2)}% a.a. ({selicDiaria.toFixed(4)}% a.d.) · BCB, {selicData}. Simulação a 100% da Selic
-        com tributação padrão de renda fixa (CDB/Tesouro Selic) — LCI, LCA e poupança são isentas de IR.
+        com tributação padrão de renda fixa (CDB/Tesouro Selic). LCI, LCA e poupança são isentas de IR.
       </p>
     </div>
   );

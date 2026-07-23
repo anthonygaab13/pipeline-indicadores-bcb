@@ -8,7 +8,7 @@ import { ArrowLeftIcon } from "@/components/icons";
 import { formatDateFull } from "@/components/charts/chart-utils";
 
 export const metadata = {
-  title: "Bastidores — Indicadores BCB",
+  title: "Bastidores · Indicadores BCB",
   description: "Diário de bordo do projeto: decisões, erros e aprendizados reais, na ordem em que aconteceram.",
 };
 
@@ -26,7 +26,7 @@ export default function BastidoresPage() {
           Diário de <span className="text-gradient-accent">bordo</span>
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Não é changelog técnico — é o porquê por trás de cada decisão, contado do jeito que aconteceu de verdade,
+          Não é changelog técnico: é o porquê por trás de cada decisão, contado do jeito que aconteceu de verdade,
           erros incluídos. Atualizo conforme o projeto (e os próximos) avançam.
         </p>
       </header>

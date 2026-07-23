@@ -67,7 +67,7 @@ export default function Home() {
           pipeline em arquitetura medallion e atualizados automaticamente toda semana.
         </p>
         <p className="mt-2 text-xs text-muted-foreground">
-          Período: {formatDateFull(stats.periodo_inicio)} — {formatDateFull(stats.periodo_fim)} · Fonte: Banco
+          Período: {formatDateFull(stats.periodo_inicio)} a {formatDateFull(stats.periodo_fim)} · Fonte: Banco
           Central do Brasil (SGS) ·{" "}
           <a href="/metodologia" className="underline-offset-4 hover:text-foreground hover:underline">
             ver metodologia
@@ -121,7 +121,7 @@ export default function Home() {
         <section className="mb-10">
           <h2 className="mb-1 text-sm font-medium text-foreground">Calculadora</h2>
           <p className="mb-3 text-xs text-muted-foreground">
-            Ferramentas rápidas de campo — câmbio e Selic direto da fonte oficial, sem precisar abrir planilha.
+            Ferramentas rápidas de campo: câmbio e Selic direto da fonte oficial, sem precisar abrir planilha.
           </p>
           <Calculator
             fallback={{
@@ -153,7 +153,7 @@ export default function Home() {
 
       <Reveal>
         <section className="mb-10 rounded-lg border border-border bg-card p-5">
-          <h3 className="mb-3 text-sm font-medium text-foreground">IPCA — variação mensal e acumulado em 12 meses</h3>
+          <h3 className="mb-3 text-sm font-medium text-foreground">IPCA · variação mensal e acumulado em 12 meses</h3>
           <ComboChart
             xLabels={mensal.map((d) => d.mes.slice(0, 7))}
             bars={mensal.map((d) => d.ipca_mensal)}

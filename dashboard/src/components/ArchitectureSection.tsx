@@ -5,12 +5,12 @@ const STEPS = [
   {
     step: "01",
     title: "Bronze",
-    description: "Dado bruto direto da API do Banco Central (SGS), sem tratamento — o registro fiel do que a fonte devolveu.",
+    description: "Dado bruto direto da API do Banco Central (SGS), sem tratamento: o registro fiel do que a fonte devolveu.",
   },
   {
     step: "02",
     title: "Silver",
-    description: "Datas e valores tipados, deduplicados e validados — nenhuma linha inválida passa pra frente.",
+    description: "Datas e valores tipados, deduplicados e validados: nenhuma linha inválida passa pra frente.",
   },
   {
     step: "03",
