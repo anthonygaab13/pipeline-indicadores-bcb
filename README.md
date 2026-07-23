@@ -9,6 +9,8 @@ modelagem em camadas, qualidade de dados, SQL analítico e automação — usand
 de raciocínio aplicado profissionalmente em dashboards de câmbio, comissão e indicadores
 financeiros.
 
+**Dashboard ao vivo:** https://indicadores-bcb.vercel.app (código em [`dashboard/`](dashboard/))
+
 ## Arquitetura
 
 ```
@@ -106,12 +108,21 @@ Cobrem: parsing da resposta da API (com mock, sem chamada real), regras de limpe
 camada silver (datas, decimais, deduplicação, validação) e as agregações SQL da camada
 gold (contra dados sintéticos, sem depender de arquivo Delta real).
 
+## Dashboard
+
+Um app Next.js em [`dashboard/`](dashboard/) visualiza os dados das tabelas gold — câmbio
+com médias móveis, Selic, IPCA (mensal + acumulado 12m), stat tiles e uma tabela de dados
+acessível. Gráficos construídos à mão em SVG (sem lib de gráficos), com crosshair, tooltip
+e uma paleta validada contra daltonismo/contraste. Publicado separadamente na Vercel,
+lendo os mesmos dados exportados como JSON estático (ver `dashboard/README.md`).
+
 ## Automação
 
 - `.github/workflows/ci.yml` — roda os testes a cada push/PR.
-- `.github/workflows/refresh-data.yml` — roda o pipeline completo semanalmente e commita
-  as tabelas atualizadas, mantendo os dados do repositório sempre recentes sem
-  intervenção manual.
+- `.github/workflows/refresh-data.yml` — roda o pipeline completo semanalmente, exporta o
+  JSON pro dashboard e commita tudo atualizado, mantendo o repositório sempre recente sem
+  intervenção manual. (O deploy do dashboard em si ainda precisa de um `vercel --prod`
+  manual depois — ver `dashboard/README.md`.)
 
 ## Estrutura
 
@@ -123,12 +134,14 @@ src/bcb_pipeline/
   silver.py            # limpeza, tipagem, deduplicação, validação
   gold.py                # agregações de negócio via DuckDB
   run_pipeline.py          # orquestra bronze -> silver -> gold
+  export_json.py           # exporta as tabelas gold como JSON pro dashboard
 tests/                     # testes unitários de cada camada
 data/                      # tabelas Delta geradas (bronze/silver/gold)
+dashboard/                 # app Next.js que visualiza os dados (ver dashboard/README.md)
 ```
 
 ## Próximos passos possíveis
 
 - Ingestão incremental por data em vez de full refresh.
 - Mais indicadores (ex: PIB, desemprego, outras taxas de câmbio).
-- Um pequeno dashboard (Streamlit) consumindo diretamente as tabelas gold.
+- Deploy Hook pra redeploy automático do dashboard a cada atualização de dados.

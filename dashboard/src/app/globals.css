@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* Dashboard sempre no tema escuro (sem toggle) — mesma paleta do portfólio
+   (fundo quase preto, acento azul), com uma tríade categórica própria pra
+   distinguir câmbio/Selic/IPCA nos gráficos. Paleta de gráfico validada com
+   o script de acessibilidade da skill de dataviz (CVD + contraste, ver PR). */
+:root {
+  --background: #0a0a0a;
+  --card: #171717;
+  --foreground: #fafafa;
+  --muted-foreground: #aeaeae;
+  --border: rgba(255, 255, 255, 0.1);
+  --primary: #00bcff;
+  --primary-foreground: #0a0a0a;
+
+  /* Cores de série dos gráficos — não usar essas cores em texto (ver marks-and-anatomy) */
+  --series-cambio: #0093d5;
+  --series-selic: #d95926;
+  --series-ipca: #199e70;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-series-cambio: var(--series-cambio);
+  --color-series-selic: var(--series-selic);
+  --color-series-ipca: var(--series-ipca);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Números em colunas/eixos alinham pela largura do dígito; texto normal não. */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

@@ -24,10 +24,13 @@ jobs:
       - name: Rodar pipeline (bronze -> silver -> gold)
         run: python -m bcb_pipeline.run_pipeline
 
+      - name: Exportar dados para o dashboard (dashboard/public/data)
+        run: python -m bcb_pipeline.export_json
+
       - name: Commitar dados atualizados, se houver mudança
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/ dashboard/public/data/
           git diff --cached --quiet || git commit -m "Atualiza dados dos indicadores (execução automática)"
           git push
